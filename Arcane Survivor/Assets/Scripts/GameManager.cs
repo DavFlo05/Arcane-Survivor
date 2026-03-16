@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     {
         spawnTimer += Time.deltaTime;
 
-        if (spawnTimer >= 10f)
+        if (spawnTimer >= 3f)
         {
             spawnTimer = 0f;
 
