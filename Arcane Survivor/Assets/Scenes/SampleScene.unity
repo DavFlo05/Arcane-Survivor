@@ -155,6 +155,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &256672041 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 821455683097070652, guid: 12df9fb46f66c734b9c3dbf3e24c2dd7, type: 3}
+  m_PrefabInstance: {fileID: 3971832024390865739}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &325427173
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,7 +761,7 @@ Transform:
   m_GameObject: {fileID: 708938190}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0383, y: -0.090600014, z: 0}
+  m_LocalPosition: {x: -0.225, y: -0.090600014, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -935,6 +940,93 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3180920251775054873, guid: 12df9fb46f66c734b9c3dbf3e24c2dd7, type: 3}
   m_PrefabInstance: {fileID: 3971832024390865739}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &884927253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256672041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f3fc9288759bc48a0218f3eb3637cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExplosiveAura
+  abilityName: 
+  level: 1
+  cooldown: 1
+  player: {fileID: 884927252}
+  radius: 2
+  baseDamage: 15
+  gameManager: {fileID: 1999192054}
+--- !u!114 &884927254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256672041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d00d8dbc45a78c4a9c18be97f9b486f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HomingMissile
+  abilityName: 
+  level: 1
+  cooldown: 1
+  missilePrefab: {fileID: 2596571512041185695, guid: e3c0871f995da1e409190b790e4f9e6f, type: 3}
+  player: {fileID: 884927252}
+  range: 10
+--- !u!114 &884927255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256672041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7dd30c627d0cf546b437e4f9a57670a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OrbitingShield
+  abilityName: 
+  level: 1
+  cooldown: 1
+  shieldPrefab: {fileID: 8822069658689338533, guid: 9f82fd5e5ae6d6946b4ee8af880b63f9, type: 3}
+  player: {fileID: 884927252}
+  orbitRadius: 1.5
+  orbitSpeed: 120
+  shieldCount: 1
+--- !u!114 &884927256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256672041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 038dda25e45d0ed4e8aef391af9da6a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AbilityManager
+  abilities:
+  - {fileID: 884927255}
+  - {fileID: 884927254}
+  - {fileID: 884927253}
+  playerLevel: 1
+--- !u!114 &884927261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256672041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f149a1dd71b4b0d4e9410865a2a8237c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExampleLevelUpTester
+  abilityManager: {fileID: 884927256}
 --- !u!1 &1062351731
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,7 +1314,7 @@ Transform:
   m_GameObject: {fileID: 1701087831}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.119766675, y: 0.02520001, z: 0}
+  m_LocalPosition: {x: 0.0854, y: 0.02520001, z: 0}
   m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1242,9 +1334,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
   damage: 10
-  cooldown: 1
+  cooldown: 2
   projectileSpeed: 5
-  area: 1.5
+  area: 1
   abilityType: 2
   weaponTier: 2
 --- !u!212 &1701087834
@@ -1537,7 +1629,7 @@ TilemapRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -62285,6 +62377,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1808045096796504989, guid: 12df9fb46f66c734b9c3dbf3e24c2dd7, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 3180920251775054873, guid: 12df9fb46f66c734b9c3dbf3e24c2dd7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0777
@@ -62334,7 +62430,22 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3180920251775054873, guid: 12df9fb46f66c734b9c3dbf3e24c2dd7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1701087832}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 821455683097070652, guid: 12df9fb46f66c734b9c3dbf3e24c2dd7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 884927256}
+    - targetCorrespondingSourceObject: {fileID: 821455683097070652, guid: 12df9fb46f66c734b9c3dbf3e24c2dd7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 884927255}
+    - targetCorrespondingSourceObject: {fileID: 821455683097070652, guid: 12df9fb46f66c734b9c3dbf3e24c2dd7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 884927254}
+    - targetCorrespondingSourceObject: {fileID: 821455683097070652, guid: 12df9fb46f66c734b9c3dbf3e24c2dd7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 884927253}
+    - targetCorrespondingSourceObject: {fileID: 821455683097070652, guid: 12df9fb46f66c734b9c3dbf3e24c2dd7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 884927261}
   m_SourcePrefab: {fileID: 100100000, guid: 12df9fb46f66c734b9c3dbf3e24c2dd7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
