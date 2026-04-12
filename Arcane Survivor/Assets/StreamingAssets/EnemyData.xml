@@ -1,0 +1,17 @@
+<EnemyDatabase>
+  <Enemy>
+    <enemyName>Slime</enemyName>
+    <hp>25</hp>
+    <speed>2.5</speed>
+  </Enemy>
+  <Enemy>
+    <enemyName>Bat</enemyName>
+    <hp>15</hp>
+    <speed>4.0</speed>
+  </Enemy>
+  <Enemy>
+    <enemyName>Tank</enemyName>
+    <hp>60</hp>
+    <speed>1.5</speed>
+  </Enemy>
+</EnemyDatabase>
