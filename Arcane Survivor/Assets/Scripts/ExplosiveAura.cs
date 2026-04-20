@@ -4,52 +4,41 @@ public class ExplosiveAura : Ability
 {
     public Transform player;
     public float radius = 2f;
-    public float baseDamage = 15f;
+    public float baseDamage = 10f;
     public GameManager gameManager;
-
-    void Start()
-    {
-        abilityName = "Explosive Aura";
-        cooldown = 3f;
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-
-        if (cooldownTimer <= 0f)
-        {
-            Activate();
-            cooldownTimer = cooldown;
-        }
-    }
 
     public override void Activate()
     {
-        float damageStat = gameManager.playerStats["Damage"];
-
-        ModifyDamageWithAura(ref damageStat);
-
-        Collider2D[] hits = Physics2D.OverlapCircleAll(player.position, radius);
-
-        foreach (Collider2D hit in hits)
+        try
         {
-            Enemy enemy = hit.GetComponent<Enemy>();
-            if (enemy != null)
+            float damageStat = gameManager.playerStats["Damage"];
+            ModifyDamage(ref damageStat);
+
+            Collider2D[] hits = Physics2D.OverlapCircleAll(player.position, radius);
+
+            foreach (Collider2D hit in hits)
             {
-                enemy.TakeDamage(baseDamage + damageStat);
+                Enemy enemy = hit.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(baseDamage + damageStat);
+                }
             }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("ExplosiveAura failed: " + ex.Message);
         }
     }
 
     public override void Upgrade()
     {
         level++;
-        radius += 0.3f;
         baseDamage += 5f;
+        radius += 0.2f;
     }
 
-    void ModifyDamageWithAura(ref float damageValue)
+    void ModifyDamage(ref float damageValue)
     {
         damageValue += level * 2f;
     }

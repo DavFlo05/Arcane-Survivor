@@ -1,18 +1,14 @@
+using System;
 using UnityEngine;
-public class Enemy : MonoBehaviour 
-{ 
-    public EnemyType type; 
-    public float damage = 5f; 
-    public Transform player; 
+
+public class Enemy : MonoBehaviour
+{
+    public static event Action<Enemy> OnEnemyDestroyed;
+
+    public EnemyType type;
+    public float damage = 5f;
+    public Transform player;
     public float health = 20f;
-    void OnDestroy() 
-    { if (GameManager.instance != null) 
-        
-        { 
-            GameManager.instance.RemoveEnemy(this); 
-        } 
-    }
-    
 
     public void TakeDamage(float amount)
     {
@@ -20,8 +16,10 @@ public class Enemy : MonoBehaviour
 
         if (health <= 0)
         {
+            OnEnemyDestroyed?.Invoke(this);
             Destroy(gameObject);
         }
     }
 }
+
 public enum EnemyType { Melee, Fast, Tank }

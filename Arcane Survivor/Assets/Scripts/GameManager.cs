@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
     float spawnTimer = 0f;
     int enemiesPerSpawn = 1;
 
-    // map boundaries
     float mapMinX = -8f;
     float mapMaxX = 8f;
     float mapMinY = -6.3f;
@@ -27,6 +26,16 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+    }
+
+    void OnEnable()
+    {
+        Enemy.OnEnemyDestroyed += RemoveEnemy;
+    }
+
+    void OnDisable()
+    {
+        Enemy.OnEnemyDestroyed -= RemoveEnemy;
     }
 
     void Start()
@@ -66,7 +75,6 @@ public class GameManager : MonoBehaviour
         Vector2 randomOffset = Random.insideUnitCircle * 4f;
         Vector2 spawnPos = (Vector2)player.position + randomOffset;
 
-        // keep inside map
         spawnPos.x = Mathf.Clamp(spawnPos.x, mapMinX, mapMaxX);
         spawnPos.y = Mathf.Clamp(spawnPos.y, mapMinY, mapMaxY);
 
@@ -88,16 +96,16 @@ public class GameManager : MonoBehaviour
 
         enemy.player = player;
         enemy.type = (EnemyType)enemyType;
-
-        ai.player = player;   // THIS IS THE FIX
+        ai.player = player;
 
         activeEnemies.Add(enemy);
     }
 
     void CheckPlayerDamage()
     {
-        foreach (Enemy enemy in activeEnemies)
+        for (int i = activeEnemies.Count - 1; i >= 0; i--)
         {
+            Enemy enemy = activeEnemies[i];
             if (enemy == null) continue;
 
             if (Vector2.Distance(player.position, enemy.transform.position) < 1.2f)
