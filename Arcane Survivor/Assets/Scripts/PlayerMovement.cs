@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private PlayerControls controls;
     private Vector2 moveInput;
+
+    public SpriteRenderer playerSprite;
 
     void Awake()
     {
@@ -31,6 +33,15 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         moveInput = controls.Player.Move.ReadValue<Vector2>();
+
+        if (moveInput.x < 0)
+        {
+            playerSprite.flipX = true;
+        }
+        else if (moveInput.x > 0)
+        {
+            playerSprite.flipX = false;
+        }
     }
 
     void FixedUpdate()

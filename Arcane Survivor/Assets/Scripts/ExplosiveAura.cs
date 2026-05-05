@@ -6,7 +6,34 @@ public class ExplosiveAura : Ability
     public float radius = 2f;
     public float baseDamage = 10f;
     public GameManager gameManager;
+    public GameObject auraVisual;
+    public float tickInterval = 1f;
+    private float tickTimer = 0f;
+    void Update()
+    {
+        tickTimer += Time.deltaTime;
 
+        if (tickTimer >= tickInterval)
+        {
+            tickTimer = 0f;
+            Activate();
+        }
+    }
+    void OnEnable()
+    {
+        if (auraVisual != null)
+        {
+            auraVisual.SetActive(true);
+        }
+    }
+
+    void OnDisable()
+    {
+        if (auraVisual != null)
+        {
+            auraVisual.SetActive(false);
+        }
+    }
     public override void Activate()
     {
         try

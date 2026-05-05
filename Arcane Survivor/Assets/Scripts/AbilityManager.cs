@@ -1,38 +1,40 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class AbilityManager : MonoBehaviour
 {
     public List<Ability> abilities = new List<Ability>();
-    public int playerLevel = 1;
 
-    public void TryUpgradeAbility(int index, out bool valid, out string message)
+    public bool TryUpgradeAbility(int abilityIndex, out bool valid, out string message)
     {
-        valid = false;
-        message = "";
-
-        if (abilities.Count == 0)
+        if (abilityIndex < 0 || abilityIndex >= abilities.Count)
         {
-            message = "No abilities are equipped.";
-            return;
+            valid = false;
+            message = "Invalid ability choice.";
+            return false;
         }
 
-        if (index < 0 || index >= abilities.Count)
+        Ability ability = abilities[abilityIndex];
+
+        if (ability == null)
         {
-            message = "That upgrade choice is out of range.";
-            return;
+            valid = false;
+            message = "Ability slot is empty.";
+            return false;
         }
 
-        Ability chosenAbility = abilities[index];
-
-        if (chosenAbility.level >= 5)
+        if (!ability.enabled)
         {
-            message = chosenAbility.abilityName + " is already max level.";
-            return;
+            ability.enabled = true;
+            valid = true;
+            message = ability.abilityName + " unlocked!";
+            return true;
         }
 
-        chosenAbility.Upgrade();
+        ability.Upgrade();
+
         valid = true;
-        message = chosenAbility.abilityName + " upgraded to level " + chosenAbility.level + ".";
+        message = ability.abilityName + " upgraded to level " + ability.level;
+        return true;
     }
 }
